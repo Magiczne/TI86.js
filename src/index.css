@@ -1,6 +1,78 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin: auto;
-  max-width: 38rem;
-  padding: 2rem;
+.display {
+  width: 100%;
+  height: 160px;
+
+  background-color: #333;
+}
+
+.grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, auto);
+  grid-column-gap: 1rem;
+  column-gap: 1rem;
+}
+
+.buttons-grid {
+  display: grid;
+  padding: 1rem;
+
+  grid-template-columns: repeat(5, auto);
+  grid-column-gap: 1rem;
+  column-gap: 1rem;
+
+  grid-template-rows: repeat(9, auto);
+  grid-row-gap: 1rem;
+  row-gap: 1rem;
+}
+
+.cursors {
+  display: grid;
+  
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+
+  grid-column-start: span 2;
+  grid-row-start: span 2;
+}
+
+.cursor-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.cursor-up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.cursor-down {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.cursor-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* .c-btn-wrapper */
+.c-btn-wrapper {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.c-btn-wrapper__alt {
+  font-size: .675rem;
+}
+
+.c-btn-wrapper__symbol {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  font-size: .675rem;
 }

@@ -33,6 +33,14 @@ import Vue from 'vue'
 import Vuetify from './plugins/vuetify'
 import App from './App.vue'
 
+import { 
+    ButtonWrapper, ButtonWrapperAlt, ButtonWrapperSymbol
+} from './components/ButtonWrapper'
+
+Vue.component('c-btn-wrapper', ButtonWrapper);
+Vue.component('c-btn-alt', ButtonWrapperAlt);
+Vue.component('c-btn-symbol', ButtonWrapperSymbol);
+
 new Vue({
     el: '#app',
     vuetify: Vuetify,
