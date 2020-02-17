@@ -43,37 +43,34 @@ class Z80 {
         while (this.pc.get() < this.rom.length) {
             const opcode = this.rom[this.pc.get()]
 
+            let opcodeString: string
+
             if (opcode === 0xED) {
-                console.warn('Extended instruction!');
-
-                this.pc.next();
+                opcodeString = `ed${(this.rom[this.pc.get() + 1]).toString(16)}`
             } else if (opcode === 0xCB) {
-                console.warn('Bit instruction!')
-
-                this.pc.next();
+                opcodeString = `cb${(this.rom[this.pc.get() + 1]).toString(16)}`
             } else if (opcode === 0xDD) {
                 if (this.rom[this.pc.get() + 1] === 0xCB) {
-                    console.warn('IX Bit instruction!')
+                    opcodeString = `ddcb**${(this.rom[this.pc.get() + 3]).toString(16)}`
                 } else {
-                    console.warn('IX Instruction!')
+                    opcodeString = `dd${(this.rom[this.pc.get() + 1]).toString(16)}`
                 }
-
-                this.pc.next();
             } else if (opcode === 0xFD) {
                 if (this.rom[this.pc.get() + 1] === 0xCB) {
-                    console.warn('IY Bit instruction!')
+                    opcodeString = `fdcb**${(this.rom[this.pc.get() + 3]).toString(16)}`
                 } else {
-                    console.warn('IY Instruction!')
+                    opcodeString = `fd${(this.rom[this.pc.get() + 1]).toString(16)}`
                 }
+            } else {
+                opcodeString = opcode.toString(16)
+            }
 
-                this.pc.next();
-            } else if (this._opcodes.has(opcode.toString(16))) {
-                // console.log(`Opcode successful: ${opcode.toString(16)}`)
-                const fun = this._opcodes.get(opcode.toString(16)) as OpcodeFunction
+            if (this._opcodes.has(opcodeString)) {
+                const fun = this._opcodes.get(opcodeString) as OpcodeFunction
                 fun(this.registers, this.pc, this.ram, this.rom)
             } else {
-                console.log(`Unknown opcode: ${opcode.toString(16)}`)
-                this.pc.next();
+                console.log(`Unknown opcode: ${opcodeString}`)
+                this.pc.next()
             }
         }
     }
